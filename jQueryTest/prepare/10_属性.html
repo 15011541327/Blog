@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="js/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		/*
+		 操作任意属性
+			 attr()
+			 removeAttr()
+		 操作class属性
+			 addClass()
+			 removeClass()
+		 操作HTML代码/文本/值
+			 html()
+			 val()
+		 */
+		$(function () {
+			var title = $('div').attr('title'); //只读取只一个元素属性
+			console.log(title);
+
+			$('div').attr('title', 'new'); //更新所有元素的属性
+
+			$('li').removeAttr('class');
+
+			$('div').addClass('newnew').removeClass('box');
+
+			var html = $('li:last').html();
+			console.log(html);
+			$('li:last').html('<h1>xxxxxx</h1>');
+
+			var username = $(':text').val();
+			console.log(username);
+
+			$(':text').val('atguigu');
+		});
+		
+	</script>
+	<body>
+		<div id="div1" class="box" title="one">class为box的div1</div>
+		<div id="div2" class="box" title="two">class为box的div2</div>
+		<div id="div3">div3</div>
+		<span class="box">class为box的span</span>
+		<br/>
+		<ul>
+			<li>AAAAA</li>
+			<li title="hello" class="box2">BBBBB</li>
+			<li class="box">CCCCC</li>
+			<li title="hello">DDDDDD</li>
+			<li title="two"><span>BBBBB</span></li>
+		</ul>
+		
+		<input type="text" name="username" value="xfzhang" />
+	</body>
+</html>

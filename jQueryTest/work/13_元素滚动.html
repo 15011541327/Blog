@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="jq/jquery-1.10.1.js">
+	</script>
+	<script>
+		$(function () {
+			//		scrollTop()
+//			得到页面滚动条的scrollTop
+            $('#btn1').click(function(){
+                var scrollTop = $("div").scrollTop();
+                console.log(scrollTop);
+
+//				$(document.body).scrollTop()+$(document.documentElement).scrollTop()
+                scrollTop = $('html').scrollTop() + $("body").scrollTop();
+                console.log(scrollTop);
+            });
+
+//			设置滚动条的新坐标:
+//				$('body,html').scrollTop(60);
+//		scrollLeft()
+            $("#btn2").click(function(){
+                $("div").scrollTop(50);
+                $("html,body").scrollTop(50);
+            })
+		});
+
+
+	</script>
+
+	<body style="height: 2000px;">
+		<div style="border:1px solid black;width:100px;height:150px;overflow:auto">
+			This is some text. This is some text. This is some text. This is some text. 
+			This is some text. This is some text. This is some text. This is some text. 
+			his is some text.
+		</div>
+		<br>
+		<br>
+		<br>
+		<button id="btn1">得到scrollTop</button>
+		<button id="btn2">设置scrollTop</button>
+	</body>
+
+</html>

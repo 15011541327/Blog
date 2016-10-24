@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>无标题文档</title>
+	<script src="jq/jquery-1.10.1.js"></script>
+	<script>
+		/*
+		 事件委托: 将当前元素的事件委托父级节点来处理
+			监听回调是加在了父级节点上
+			当操作是当前的元素时, 事件冒泡到父级节点
+			父级节点根据事件的target值, 找到发生事件的子元素, 通过这个子元素调用事件回调函数
+
+			委托方:业主  li
+			被委托方: 中介  ul
+		 */
+		//delegate[ˈdɛlɪˌɡeɪt; -ɡɪt; (for v.,) ˈdɛlɪˌɡeɪt]委派…为代表
+		$(function () {
+		    $('ul').delegate('li','click',function(){
+                $(this).css('background', 'red');
+            });
+
+            $('#btn1').click(function () {
+                $("<li>zzzzzzzzzz</li>").appendTo('ul');
+            });
+            $("#btn2").click(function () {
+                $('ul').off();
+            });
+		})
+
+	</script>
+</head>
+
+<body>
+	<ul>
+		<li>11111</li>
+	    <li>2222</li>
+	    <li>3333</li>
+	    <li>4444</li>
+	</ul>
+	
+	<li>22222</li>
+	<br>
+	<button id="btn1">添加新的li</button><br>
+	<button id="btn2">删除ul上的事件委托的监听器</button>
+</body>
+</html>

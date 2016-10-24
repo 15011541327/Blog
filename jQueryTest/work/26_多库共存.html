@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		* {
+			margin: 0px;
+		}
+		.div1 {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			top: 50px;
+			left: 10px;
+			background: red;
+		}
+	</style>
+	<script src="mylib.js" type="text/javascript" charset="utf-8"></script>
+	<script src="jq/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		/*如果两个库都有$,jQuery可以释放$的使用权，让另一个库正常使用*/
+		//jQuery释放$的使用权
+		jQuery.noConflict();
+		$();
+        jQuery(function () {
+            jQuery('body');
+            console.log('a');
+        });
+	</script>
+	<body>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

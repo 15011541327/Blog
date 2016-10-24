@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="jq/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			//		 $.each(): 遍历数组或对象中的数据
+			var person = {
+				name:'tom',
+				age:12
+			};
+			$.each(person,function(key,value){
+				console.log(key,value);
+			});
+//		 $.trim(): 去除字符串两边的空格
+            var str = '    atguigu ';
+            console.log($.trim(str) === 'atguigu');
+//		 $.type(obj): 得到数据的类型
+            console.log($.type($));
+            console.log($.type($()));
+//		 $.isarray(obj): 判断是否是数组
+            console.log($.isArray($()));
+            console.log($.isArray([]));
+//		 $.isFunction(obj): 判断是否是函数
+            console.log($.isFunction($));
+            console.log($.isFunction($()));
+//		 $.parseJSON(json) : 解析json字符串转换为js对象/数组
+           // var json = '{"name":"tiantian","age":18}';
+           // console.log($.parseJSON(json));
+            var json = '[{"name":"tiantian","age":18}, {"name":"jiajia","age":12}]';
+            console.log($.parseJSON(json));
+		})
+
+
+	</script>
+	<body>
+	</body>
+</html>

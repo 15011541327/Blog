@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>尚硅谷HTML5</title>
+    <style type="text/css">
+        /*去除内边距,没有链接下划线*/
+        * {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+        }
+        /*让<body有20px的内边距*/
+        body {
+            padding: 20px;
+        }
+        /*最外围的div*/
+        #container {
+            width: 600px;
+            height: 400px;
+            border: 3px solid #333;/*边框3px灰色实线*/
+            overflow: hidden;
+            position: relative;/*相对定位*/
+        }
+        /*包含所有图片的<div>*/
+
+        #list {
+            width: 4200px;/*7张图片的宽: 7*600 */
+            height: 400px;
+            position: absolute; /*绝对定位*/
+            z-index: 1;
+
+        }
+        /*所有的图片<img>*/
+        #list img {
+            float: left;/*浮在左侧*/
+        }
+        /*包含所有圆点按钮的<div>*/
+        #buttons {
+            position: absolute;
+            height: 10px;
+            width: 100px;
+            z-index: 2;
+            bottom: 20px;
+            left: 250px;
+        }
+        /*所有的圆点<span>*/
+
+        #buttons span {
+            cursor: pointer;
+            float: left;
+            border: 1px solid #fff;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+            margin-right: 5px;
+        }
+        /*第一个<span>*/
+
+        #buttons .on {
+            background: orangered;
+        }
+        /*切换图标<a>*/
+
+        .arrow {
+            cursor: pointer;
+            display: none;
+            line-height: 39px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            z-index: 2;
+            top: 180px;
+            background-color: RGBA(0, 0, 0, 0.3);
+            color: #fff;
+        }
+        /*鼠标移到切换图标上时*/
+        .arrow:hover {
+            background-color: RGBA(0, 0, 0, 0.7);
+        }
+        /*鼠标移到整个div区域时*/
+        #container:hover .arrow {
+            display: block;/*显示*/
+        }
+        /*上一个切换图标的左外边距*/
+        #prev {
+            left: 20px;
+        }
+        /*下一个切换图标的右外边距*/
+        #next {
+            right: 20px;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery.1.10.2.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var $list = $("#list");
+            var $imgs = $list.children('img');
+            //创建span
+            for(var i = 0; i < $imgs.length -2; i++){
+                $('<span></span>').appendTo('#buttons');
+            }
+
+            var $prev = $("#prev");
+            var $next = $("#next");
+            var $spans = $("#buttons>span");
+            var timer = null;
+            //初始化第一个圆点
+            $spans.first().attr('class','on');
+
+            //向左翻页
+            $prev.click(function () {
+                nextPage(false);
+            });
+            //向右翻页
+            $next.click(function () {
+                nextPage(true);
+            });
+            $spans.click(function () {
+                nextPage($(this).index());
+            });
+            autoplay();
+            $("#container").hover(function () {
+                clearInterval(timer);
+            },function () {
+                autoplay();
+            });
+
+
+            function autoplay(){
+                 timer = setInterval(function () {
+                    nextPage(true) ;
+                },1000)
+            }
+            var index = 0;
+            var SLID_TIME = 400;
+            var moving = false;   //图片是否移动
+            function nextPage(next) {
+                if(moving){
+                    return;
+                }
+                moving = true;
+                var targetLeft = 0;
+                var currentLeft = parseInt($list.position().left);
+                console.log('currentLeft='+currentLeft);
+                var offset = 0;
+
+                if(typeof next == 'boolean'){
+                    offset = next ? -600:600;
+                }else{
+                    if(next - index == 0){//点击的是当前页面
+                        moving = false;
+                        return;
+                    }
+                    offset = -600*(next - index);
+                }
+                targetLeft = currentLeft + offset;
+                //console.log(offset);
+                console.log(targetLeft);
+                $list.animate({
+                    left : targetLeft
+                },SLID_TIME, 'linear', function () {
+                    //标识动画停止
+                    moving = false;
+                    if(targetLeft ==-($spans.length+1)*600) {
+                        $list.css("left", -600);
+                    } else if(targetLeft==0) {
+                        $list.css('left',-$spans.length*600);
+                    }
+                /*$list.animate({
+                    left: targetLeft
+                },SLID_TIME,'linear',function () {
+                    moving = false;
+                    if(targetLeft ==-($spans.length +1)*600) {
+                        console.log($spans.length+1);
+                        $list.css("left", -600);
+                    } else if(targetLeft==0) {
+                        $list.css('left',-$spans.length*600);
+                    }*/
+                });
+                updatePoint(next);
+            }
+
+            function updatePoint(next) {
+                var targetIndex;
+                $spans.eq(index).removeClass();
+                if(typeof next == 'boolean'){
+
+                    if(next){
+                        targetIndex = index +1;
+                        //最右边
+                        if(targetIndex == $spans.length){
+                            targetIndex = 0
+                        }
+                    }else{
+                        targetIndex = index -1;
+                        //最左边
+                        if(targetIndex == 0){
+                            targetIndex = $spans.length;
+                        }
+                    }
+                }else {
+                    if(next - index == 0){
+                        return;
+                    }
+                    targetIndex = next;
+                }
+                $spans.eq(targetIndex).attr('class','on');
+                //更新index
+                index = targetIndex;
+            }
+        })
+
+    </script>
+</head>
+
+<body>
+<div id="container">
+    <div id="list" style="left: -600px;">
+        <img src="img/5.jpg" alt="1" />
+        <img src="img/1.jpg" alt="1" />
+        <img src="img/2.jpg" alt="2" />
+        <img src="img/3.jpg" alt="3" />
+        <img src="img/4.jpg" alt="4" />
+        <img src="img/5.jpg" alt="5" />
+        <img src="img/1.jpg" alt="5" />
+    </div>
+    <div id="buttons">
+        <!--<span index="1" class="on"></span>
+        <span index="2"></span>
+        <span index="3"></span>
+        <span index="4"></span>
+        <span index="5"></span>-->
+    </div>
+    <a href="javascript:;" id="prev" class="arrow">&lt;</a>
+    <a href="javascript:;" id="next" class="arrow">&gt;</a>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery的二把利器</title>
+	</head>
+	<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+	<script type="text/javascript">
+		/*
+		1. jQuery核心函数:  $/jQuery
+		2. jQuery对象: 执行$()返回的对象
+		 */
+		console.log(typeof $);  //$是一个函数
+
+		console.log($===window.$); //true $是一个全局函数, 可以直接使用
+
+		console.log($===jQuery); //true $与jQuery是等同的, 但一般都使用$(简单)
+
+		console.log(typeof $()); //object $()执行返回的是一个object对象, 也就是jQuery对象
+
+
+		/*
+			疑问(后面学习的重点):
+			1. $: 执行的功能是什么?
+			2. jQuery对象有哪些属性或方法?
+		 */
+	</script>
+	
+	<body>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		* {
+			margin: 0 px;
+		}
+		.div1 {
+			position: absolute;
+			width: 200px;
+			height: 200px;
+			top: 20px;
+			left: 10px;
+			background: blue;
+		}
+	</style>
+	<script src="jq/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+
+		/*
+		hover()
+		 */
+        $(function () {
+            $('div').hover(function () {
+                $(this).css('background', 'green');
+            },function () {
+                $(this).css('background', 'blue');
+            })
+        });
+
+	</script>
+	<body>
+		<div class="div1">
+			鼠标移入绿色,移出蓝色
+		</div>
+	</body>
+</html>

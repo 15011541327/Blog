@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="js/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		/*
+		 $.each(): 遍历数组或对象中的数据
+		 $.trim(): 去除字符串两边的空格
+		 $.type(obj): 得到数据的类型
+		 $.isarray(obj): 判断是否是数组
+		 $.isFunction(obj): 判断是否是函数
+		 $.parseJSON(json) : 解析json字符串转换为js对象/数组
+		 */
+
+		//$.each(): 遍历数组或对象中的数据
+		var obj = {
+			username : "Tom",
+			age : 12
+		};
+		$.each(obj, function (name, value) {
+			console.log(name+"="+value);
+		});
+
+		//$.type(obj): 得到数据的类型
+		console.log($.type($)); //"function"
+		console.log($.type($())); //"object"
+		console.log(typeof []); //'object'
+		console.log($.type([])); //"array"
+		//$.isarray(obj): 判断是否是数组
+		console.log($.isArray([])); //true
+		console.log($.isArray({})); //false
+
+		//$.isFunction(obj): 判断是否是函数
+		console.log($.isFunction($)); // true
+		console.log($.isFunction($())); //false
+
+		//$.parseJSON(json) : 解析json字符串转换为js对象/数组
+		var json = '{"name":"Tom", "age":23}';
+		var obj = $.parseJSON(json);
+		console.log(obj);
+
+	</script>
+	<body>
+	</body>
+</html>

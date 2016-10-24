@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>04_jQuery对象</title>
+		<script src="jq/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+/*
+基本行为
+	each()
+	size()/length
+	[index]/get()
+	index()
+*/
+/*
+需求: 
+需求1. 统计一共有多少个按钮
+需求2. 取出第2个button的文本
+需求3. 输出所有button标签的文本
+需求4. 输出'测试四'按钮是所有按钮中的第几个
+ */
+			//jquery对象是一个包含所有匹配的任意多个dom元素的伪数组对象；
+			$(function () {
+			    var $btn = $('button');
+                //需求1. 统计一共有多少个按钮
+				console.log($btn.size());
+				console.log($btn.length);
+                //需求2. 取出第2个button的文本
+                console.log($btn[1].innerHTML);
+                console.log($btn.get(1).innerHTML);
+                //需求3. 输出所有button标签的文本
+                $btn.each(function(){
+                    console.log(this.innerHTML);
+                });
+                //需求4. 输出'测试四'按钮是所有按钮中的第几个
+			    console.log($('#btn4').index());
+			})
+
+		</script>
+	</head>
+
+	<body>
+		<button>测试一</button>
+		<button>测试二</button>
+		<button id="btn4">测试四</button>
+		<button>测试三</button>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

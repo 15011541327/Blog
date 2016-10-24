@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+</head>
+<style>
+    form{margin: 100px auto;width: 500px;}
+</style>
+<body>
+<form action="###">
+    你爱好的运动是？
+    <input type="checkbox" id="allOrNoChecked">全选/全不选 <br>
+
+    <input type="checkbox" name="items" value="足球">足球
+    <input type="checkbox" name="items" value="篮球">篮球
+    <input type="checkbox" name="items" value="羽毛球">羽毛球
+    <input type="checkbox" name="items" value="乒乓球">乒乓球<br>
+
+    <input type='button' id="allChecked" value="全选">
+    <input type="button" id="allNotChecked" value="全不选">
+    <input type="button" id="reverseChecked" value="反选">
+    <input type="submit" value="提交">
+</form>
+<script type="text/javascript" src="jquery-1.10.1.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var $allOrNoChecked = $("#allOrNoChecked");
+        var $allChecked = $("#allChecked");
+        var $allNotChecked = $("#allNotChecked");
+        var $reverseChecked = $("#reverseChecked");
+        var $items = $("[name=items]");
+        $allChecked.click(function () {
+            $items.prop('checked',true);
+            $allOrNoChecked.prop('checked',true);
+        });
+        $allNotChecked.click(function () {
+            $items.prop('checked',false);
+            $allOrNoChecked.prop('checked',false);
+        });
+        $reverseChecked.click(function () {
+            $items.each(function () {
+                this.checked = !this.checked;
+            });
+            $allOrNoChecked.prop('checked',$("[name=items]:not(:checked)").length == 0);
+        });
+        $allOrNoChecked.click(function () {
+            $items.prop('checked',this.checked);
+        });
+        $items.click(function () {
+            $allOrNoChecked.prop('checked',$("[name=items]:not(:checked)").length == 0);
+        })
+
+     })
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

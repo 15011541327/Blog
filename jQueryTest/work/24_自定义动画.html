@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		* {
+			margin: 0px;
+		}
+		.div1 {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			top: 50px;
+			left: 10px;
+			background: red;
+		}
+	</style>
+	<script src="jq/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		/*
+		animate()
+			自定义动画效果的动画
+		stop()
+			停止动画
+		 */
+		$(function () {
+		  $("#btn1").click(function () {
+		      $("div").animate({
+				  width:200,
+				  height:300
+			  });
+		  });
+            $("#btn2").click(function () {
+                $("div").animate({
+                    left:$(this).position().left+200
+                })
+            });
+            $("#btn3").click(function () {
+                $("div").animate({
+                    left:$(this).position().left-200,
+                    top:$(this).position().top+200
+                },5000)
+            });
+            $('#btn4').click(function(){
+                $("div").stop();
+            });
+		})
+
+	</script>
+	<body>
+		<button id="btn1">逐渐扩大</button>
+		<button id="btn2">向右移动</button>
+		<button id="btn3">向左移动</button>
+		<button id="btn4">停止动画</button>
+		
+		<div class="div1">
+			sdfsdfsdf
+		</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

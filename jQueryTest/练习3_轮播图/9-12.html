@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <style type="text/css">
+        *{margin: 0;padding:0;list-style: none;}
+        #wrap{position:relative;width:600px;height:400px;margin: 0 auto;overflow:hidden;}
+        #slide{position:absolute;left:-600px;width:4200px;}
+        #slide li{float:left;}
+        #slide li img{display: block;}
+        #nav{position:absolute;bottom:10px;text-align: center;width: 100%;}
+        #nav span{display:inline-block;width:10px;height:10px;border-radius:50%;background-color:#fff;}
+        .arrow {
+            cursor: pointer;
+            display: none;
+            line-height: 39px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            z-index: 2;
+            top: 180px;
+            background-color: RGBA(0, 0, 0, 0.3);
+            color: #fff;
+        }
+        /*鼠标移到切换图标上时*/
+        .arrow:hover {
+            background-color: RGBA(0, 0, 0, 0.7);
+        }
+        /*鼠标移到整个div区域时*/
+        #wrap:hover .arrow {
+            display: block;/*显示*/
+        }
+        #prev {
+            left: 20px;
+        }
+        /*下一个切换图标的右外边距*/
+        #next {
+            right: 20px;
+        }
+        #nav .on{background-color: #000;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul id="slide">
+            <li><img src="./img/5.jpg" alt=""></li>
+            <li><img src="./img/1.jpg" alt=""></li>
+            <li><img src="./img/2.jpg" alt=""></li>
+            <li><img src="./img/3.jpg" alt=""></li>
+            <li><img src="./img/4.jpg" alt=""></li>
+            <li><img src="./img/5.jpg" alt=""></li>
+            <li><img src="./img/1.jpg" alt=""></li>
+        </ul>
+        <div id="nav">
+            <span class="on"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <a href='###'id="prev" class="arrow"> < </a>
+        <a href='###'id="next" class="arrow"> > </a>
+    </div>
+    <script type="text/javascript" src="js/jquery.1.10.2.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var index = 0;
+        var $prev = $("#prev");
+        var $next = $("#next");
+        var $slide = $("#slide");
+        var $spans = $("#nav span");
+        var clearTime = null;
+        var TIME = 400;
+        var moving = false;
+        $prev.click(function () {
+            nextPage(false);
+        });
+        $next.click(function () {
+            nextPage(true);
+        });
+        $spans.click(function () {
+            nextPage($(this).index());
+        });
+        $("#wrap").hover(function () {
+            clearInterval(clearTime);
+        },function () {
+            auto();
+        });
+        auto();
+        function auto() {
+            clearTime = setInterval(function () {
+                nextPage(true);
+            },1000)
+        }
+        function nextPage(next) {
+            if(moving){
+                return;
+            }
+            moving = true;
+            var currentLeft = $slide.position().left;
+            var offsetLeft = 0;
+            var targetLeft = 0;
+            if(typeof next == 'boolean'){
+                offsetLeft += next? -600:600;
+            }else{
+                if(next - index == 0){
+                    return;
+                }
+                offsetLeft = -(next-index)*600;
+            }
+            targetLeft = offsetLeft + currentLeft;
+            $slide.animate({
+                left:targetLeft
+            },TIME,'linear',function () {
+                if(targetLeft == -600*($spans.length+1)){ //最右边一张
+                    $slide.css('left', -600);
+                }
+                if(targetLeft == 0){
+                    $slide.css('left',-600*$spans.length);
+                }
+                moving = false;
+            });
+            updatePoint(next);
+        }
+        function updatePoint(next) {
+            $spans.eq(index).removeClass('on');
+            var targetIndex = 0;
+            if(typeof next == 'boolean'){
+                targetIndex = next ? index+1 :index - 1;
+                if(targetIndex > $spans.length-1){//最右边一张
+                    targetIndex = 0;
+                }
+                if(targetIndex<0){
+                    targetIndex =  $spans.length-1;
+                }
+            }else{
+                targetIndex = next;
+            }
+            $spans.eq(targetIndex).addClass('on');
+            index = targetIndex;
+        }
+
+
+    })
+</script>
+</body>
+</html>

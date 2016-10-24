@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+
+    <style type="text/css">
+        /** 添加样式 **/
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="jquery-1.12.4.min.js">
+    $(function() {
+        $("#button").click(function() {
+            $("#form :input").not(":button, :submit, :reset, :hidden").val("").removeAttr("checked").remove("selected");//核心
+        });
+    })
+</script>
+
+<form id="form">
+    <input type="radio" checked="checked">
+    <input type="checkbox" checked="checked">
+    <select>
+        <option>option1</option>
+        <option selected="selected">option2</option>
+    </select>
+    <input type="text" value="">
+
+    <input type="hidden" value="hidden">
+    <input type="button" value="button">
+    <input type="reset" value="reset">
+    <input type="submit" value="submit">
+</form>
+
+<button id="button">真正清空</button>
+
+</body>
+</html>

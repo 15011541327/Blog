@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>04_jQuery对象</title>
+    <script src="js/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<script type="text/javascript">
+    /*
+     基本行为
+     each()
+     size()/length
+     [index]/get(index)
+     index()
+     */
+    /*
+     需求:
+     需求1. 统计一共有多少个按钮
+     需求2. 取出第2个button的文本
+     需求3. 输出所有button标签的文本
+     需求4. 输出'测试四'按钮是所有按钮中的第几个
+     */
+    $(function () {
+//需求1. 统计一共有多少个按钮
+        //得到包含所有button的jQuery对象
+        var $btns = $('button'); //所有的jQuery对象变量名都以$开头
+
+        //size()/length
+        console.log($btns.size());
+        console.log($btns.length);
+//需求2. 取出第2个button的文本
+        //[index]/get()
+        console.log($btns[1].innerHTML);
+        console.log($btns.get(1).innerHTML);
+
+//需求3. 输出所有button标签的文本
+        //each(function(index, domEle){})
+        $btns.each(function (index, domEle) {
+            //console.log('第'+index+'个button的文本为: '+domEle.innerHTML);
+            console.log('第'+index+'个button的文本为: '+this.innerHTML); //this即为当前遍历的domELe
+        });
+//需求4. 输出'测试四'按钮是所有按钮中的第几个
+        //index()
+        console.log($('#btn4').index()); //2
+    });
+
+</script>
+<body>
+<button>测试一</button>
+<button>测试二</button>
+<button id="btn4">测试四</button>
+<button>测试三</button>
+</body>
+</html>

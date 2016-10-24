@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		* {
+			margin: 0px;
+		}
+		.div1 {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			top: 50px;
+			left: 10px;
+			background: red;
+		}
+	</style>
+	<script src="jq/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="extend/my-jQuery-plugin.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		/*
+		扩展jQuery的工具方法
+			$.extend(object)
+		扩展jQuery对象的方法
+			jQuery.fn.extend(object);
+		 */
+			$(function () {
+			    //使用插件$的插件
+				console.log('处理后：'+ $.leftTrim('           abc               ')+'---------');
+                console.log('处理后：'+ $.rightTrim('           abc               ')+'---------');
+
+                //使用jQuery对象的插件
+                $('#checkedAllBtn').click(function () {
+                    $('[name = items]').checkAll();
+                });
+                $("#checkedNoBtn").click(function () {
+                    $('[name = items]').unCheckAll();
+                });
+                $("#reverseCheckedBtn").click(function () {
+                    $('[name = items]').reverseCheck();
+                })
+			})
+	</script>
+	<body>
+		<input type="checkbox" name="items" value="足球" />足球
+		<input type="checkbox" name="items" value="篮球" />篮球
+		<input type="checkbox" name="items" value="羽毛球" />羽毛球
+		<input type="checkbox" name="items" value="乒乓球" />乒乓球
+		<br />
+		<input type="button" id="checkedAllBtn" value="全　选" />
+		<input type="button" id="checkedNoBtn" value="全不选" />
+        <input type="button" id="reverseCheckedBtn" value="反选" />
+	</body>
+</html>

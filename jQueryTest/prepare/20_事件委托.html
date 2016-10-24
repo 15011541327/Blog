@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>无标题文档</title>
+	<script src="js/jquery-1.10.1.js"></script>
+	<script>
+		$(function(){
+			$("ul>li").click(function () {
+				//this.style.background = 'red';
+				$(this).css('background', 'red');
+			});
+			
+			$("#btn1").click(function () {
+				$('<li>new 文本</li>').appendTo('ul');
+			});
+			
+		});
+	
+	</script>
+</head>
+
+<body>
+	<ul>
+		<li>11111</li>
+	    <li>1111</li>
+	    <li>1111</li>
+	    <li>111</li>
+	</ul>
+	
+	<li>22222</li>
+	<br>
+	<button id="btn1">添加新的li</button><br>
+	<button id="btn2">删除ul上的事件委托的监听器</button>
+</body>
+</html>

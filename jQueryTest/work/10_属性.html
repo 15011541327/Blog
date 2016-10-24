@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="jq/jquery-1.10.1.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+$(function(){
+	//		 操作任意属性
+//			 attr()读取时只返回第一个数据
+    var title = $('div').attr('title');
+    console.log(title);
+//写的时候操作目标是所有的dom元素
+    $('div').attr('name','atguigu');//给div添加name=“atguigu”属性
+//			 removeAttr()移除时操作目标是所有的dom元素
+    $('div').removeAttr('title');
+//		 操作class属性
+    $('div').attr('class','tiantian');
+//			 addClass()
+    $('div').addClass('ok');
+//			 removeClass()
+    $('div').removeClass('ok');
+//		 操作HTML代码/文本/值
+//			 html()最后一个li的标签文本
+            var text = $('li:last').html();
+            console.log(text);                  //<span>BBBBB</span>
+            $('li:last').html('<h1>ppppppppppppppp</h1>');
+//			 val()
+    var value = $('input').val();
+    console.log(value);
+    $('input').val('tiantian');
+})
+
+
+		
+	</script>
+	<body>
+		<div id="div1" class="box" title="one">class为box的div1</div>
+		<div id="div2" class="box" title="two">class为box的div2</div>
+		<div id="div3">div3</div>
+		<span class="box">class为box的span</span>
+		<br/>
+		<ul>
+			<li>AAAAA</li>
+			<li title="hello" class="box2">BBBBB</li>
+			<li class="box">CCCCC</li>
+			<li title="hello">DDDDDD</li>
+			<li title="two"><span>BBBBB</span></li>
+		</ul>
+		
+		<input type="text" name="username" value="xfzhang" />
+	</body>
+</html>

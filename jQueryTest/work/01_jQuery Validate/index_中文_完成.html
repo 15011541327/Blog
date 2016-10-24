@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/screen.css">
+    <style>
+        #commentForm {
+            width: 500px;
+        }
+        #commentForm label {
+            width: 250px;
+        }
+        #commentForm label.error, #commentForm input.submit {
+            margin-left: 253px;
+        }
+        #signupForm {
+            width: 670px;
+        }
+        #signupForm label.error {
+            margin-left: 10px;
+            width: auto;
+            display: inline;
+        }
+        #newsletter_topics label.error {
+            display: none;
+            margin-left: 103px;
+        }
+    </style>
+</head>
+<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+<script type="text/javascript">
+    /*
+    验证的方式
+    1. 通过标签属性验证
+    2. 通过js验证
+     */
+    /*
+     required: "This field is required.",
+     remote: "Please fix this field.",
+     email: "Please enter a valid email address.",
+     url: "Please enter a valid URL.",
+     date: "Please enter a valid date.",
+     dateISO: "Please enter a valid date ( ISO ).",
+     number: "Please enter a valid number.",
+     digits: "Please enter only digits.",
+     equalTo: "Please enter the same value again.",
+     maxlength: $.validator.format( "Please enter no more than {0} characters." ),
+     minlength: $.validator.format( "Please enter at least {0} characters." ),
+     rangelength: $.validator.format( "Please enter a value between {0} and {1} characters long." ),
+     range: $.validator.format( "Please enter a value between {0} and {1}." ),
+     max: $.validator.format( "Please enter a value less than or equal to {0}." ),
+     min: $.validator.format( "Please enter a value greater than or equal to {0}." ),
+     step: $.validator.format( "Please enter a multiple of {0}." )
+     */
+
+    $.validator.setDefaults({
+        submitHandler: function() { //验证通过后, 准备提交form前调用
+            alert("submitted!");
+        }
+    });
+
+    $(function(){
+        //1. 通过标签属性验证
+        $('#commentForm').validate();
+
+        //2. 通过js验证
+        $('#signupForm').validate({
+            rules : {
+                Firstname : {
+                    required : true
+                },
+                lastname : 'required',
+                username : {
+                    required : true,
+                    minlength : 2
+                },
+                password : {
+                    required : true,
+                    minlength : 6
+                },
+                confirm_password : {
+                    required : true,
+                    minlength : 6,
+                    equalTo : '#password'
+                },
+                agree : 'required',
+                topic : {
+                    required : '#newsletter:checked',
+                    minlength : 2
+                }
+            }
+        });
+    });
+</script>
+<body>
+<div id="main">
+    <form class="cmxform" id="commentForm" method="get" action="">
+        <fieldset>
+            <p>
+                <label for="cname">Name (必须,至少2个字符)</label>
+                <input id="cname" name="name" type="text"
+                    required minlength="2">
+            </p>
+            <p>
+                <label for="cemail">E-Mail (必须,邮箱)</label>
+                <input id="cemail" name="email" type="email" required>
+            </p>
+            <p>
+                <label for="curl">URL (可选,URL)</label>
+                <input id="curl" name="url" type="url">
+            </p>
+            <p>
+                <label for="ccomment">Your comment (必须的)</label>
+                <textarea id="ccomment" name="comment" required></textarea>
+            </p>
+            <p>
+                <input class="submit" type="submit" value="Submit">
+            </p>
+        </fieldset>
+    </form>
+
+    <form class="cmxform" id="signupForm" method="get" action="">
+        <fieldset>
+            <legend>验证完整的表单</legend>
+            <p>
+                <label for="firstname">名字</label>
+                <input id="firstname" name="Firstname" type="text">
+            </p>
+            <p>
+                <label for="lastname">姓氏</label>
+                <input id="lastname" name="lastname" type="text">
+            </p>
+            <p>
+                <label for="username">用户名</label>
+                <input id="username" name="username" type="text">
+            </p>
+            <p>
+                <label for="password">密码</label>
+                <input id="password" name="password" type="password">
+            </p>
+            <p>
+                <label for="confirm_password">验证密码</label>
+                <input id="confirm_password" name="confirm_password" type="password">
+            </p>
+            <p>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email">
+            </p>
+            <p>
+                <label for="agree">请同意我们的声明</label>
+                <input type="checkbox" class="checkbox" id="agree" name="agree">
+            </p>
+            <p>
+                <label for="newsletter">我乐意接收新信息</label>
+                <input type="checkbox" class="checkbox" id="newsletter" name="newsletter">
+            </p>
+            <fieldset id="newsletter_topics">
+                <legend>主题 (至少选择两个) - 注意：如果没有勾选“我乐意接收新信息”以下选项会隐藏，但我们这里作为演示让它可见</legend>
+                <label for="topic_marketflash">
+                    <input type="checkbox" id="topic_marketflash" value="marketflash" name="topic">Marketflash
+                </label>
+                <label for="topic_fuzz">
+                    <input type="checkbox" id="topic_fuzz" value="fuzz" name="topic">Latest fuzz
+                </label>
+                <label for="topic_digester">
+                    <input type="checkbox" id="topic_digester" value="digester" name="topic">Mailing list digester
+                </label>
+                <label for="topic" class="error">Please select at least two topics you'd like to receive.</label>
+            </fieldset>
+            <p>
+                <input class="submit" type="submit" value="提交">
+            </p>
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>

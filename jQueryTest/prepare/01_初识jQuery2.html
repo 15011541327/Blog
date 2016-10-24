@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>01_初识jQuery</title>
+	</head>
+	<!--引入jQuery库文件-->
+	<script type="text/javascript" src="js/jquery-1.10.1.js"></script>
+	<script type="text/javascript">
+		//给window绑定onload监听回调函数
+	    $(function () {
+	    	//找到id为confirm的标签, 并绑定点击监听回调
+	        $('#confirm').click(function () {
+	        	//找到id为name的标签, 并得到其value值
+				var name = $('#name').val();
+	            alert(name);
+	        });
+	    });
+	</script>
+	<body>
+<!--
+需求: 点击"确定"按钮, 提示输入的值
+-->
+
+		用户名:
+		<input type="text" name="username" id="name" />
+		<input type="button" id="confirm" value="确定" />
+	</body>
+
+</html>

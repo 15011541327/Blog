@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+</head>
+<body>
+<form method="post" action="">
+    你爱好的运动是？<input type="checkbox" id="checkedAllBox" />全选/全不选
+
+    <br />
+    <input type="checkbox" name="items" value="足球" />足球
+    <input type="checkbox" name="items" value="篮球" />篮球
+    <input type="checkbox" name="items" value="羽毛球" />羽毛球
+    <input type="checkbox" name="items" value="乒乓球" />乒乓球
+    <br />
+    <input type="button" id="checkedAllBtn" value="全　选" />
+    <input type="button" id="checkedNoBtn" value="全不选" />
+    <input type="button" id="checkedRevBtn" value="反　选" />
+    <input type="button" id="sendBtn" value="提　交" />
+</form>
+
+<script type="text/javascript">
+    window.onload = function () {
+        var items = document.getElementsByName('items');
+        var btn1 = document.getElementById('checkedAllBtn');
+        var btn2 = document.getElementById('checkedNoBtn');
+        var btn3 = document.getElementById('checkedRevBtn');
+        var btn4 = document.getElementById('sendBtn');
+        var btn = document.getElementById('checkedAllBox');
+        btn1.onclick = function () {
+            for (var i = 0; i < items.length; i++) {
+                items[i].checked = true;
+            }
+            btn.checked = true;
+        };
+        btn2.onclick = function () {
+            for (var i = 0; i < items.length; i++) {
+               items[i].checked = false;
+            }
+            btn.checked = false;
+        };
+        btn3.onclick = function () {
+            btn.checked = true;
+            for (var i = 0; i < items.length; i++) {
+                if(items[i].checked){
+                    items[i].checked = false;
+                }else{
+                    items[i].checked = true;
+                }
+                if(!items[i].checked){
+                    btn.checked = false;
+                }
+            }
+        };
+        btn4.onclick = function () {
+            for (var i = 0; i < items.length; i++) {
+                if(items[i].checked){
+                    alert(items[i].value);
+                }
+            }
+        };
+        btn.onclick = function () {
+            for (var i = 0; i < items.length; i++) {
+                items[i].checked = this.checked;
+            }
+        };
+        for (var i = 0; i < items.length; i++) {
+           items[i].onclick = function () {
+               btn.checked = true;
+               for (var j = 0; j < items.length; j++) {
+                 if(!items[j].checked){
+                     btn.checked = false;
+                 }
+
+               }
+           }
+
+        }
+        
+
+    }
+</script>
+</body>
+</html>
